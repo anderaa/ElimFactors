@@ -4,16 +4,16 @@ rm(list=ls())
 # Set Parameter Values
 
 # inputs for simulation
-simulationYears <- 3   # UNUSED
-iterations      <- 5  # UNUSED
+simulationYears <- 1  
+iterations      <- 5  
 
 # Build matrix of all combinations of parameters that are varied:
-initialPopSizeList    <- seq(200, 20000, length.out=10)
+initialPopSizeList    <- seq(200, 15500, length.out=10)
 fecundityFactorList   <- seq(0.5, 1.5, length.out=5)
-varianceFactorList    <- seq(0.5, 1.5, length.out=5)
+varianceFactorList    <- c(1)
 meanFactorList        <- seq(0.5, 1.5, length.out=5)
 survivalProbList      <- seq(0, 0.001, length.out=5)
-initialFracImmuneList <- seq(0, 0.7, length.out=5)
+initialFracImmuneList <- seq(0, 1, length.out=11)
 inMigrationFactor     <- seq(0, 0.1, length.out=5)
 
 paramCombos <- expand.grid(initialPopSizeList, fecundityFactorList, 
