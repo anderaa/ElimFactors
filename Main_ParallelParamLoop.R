@@ -356,18 +356,21 @@ simulationData <- foreach(c = 1:nrow(paramCombos), .combine=rbind, .inorder=FALS
     
     # Transition exposed to infective:
     newInfective <- popMatrix[, 'exposed'] == 1 & popMatrix[, 'timeExposed'] > popMatrix[, 'timeLimitExposed']
-    popMatrix[newInfective, 'exposed']       <- 0
-    popMatrix[newInfective, 'infective']     <- 1
-    popMatrix[newInfective, 'timeInfective'] <- 0
+    recoverDraw <- runif(length(newInfective))
+    # If a dog is both leaving exposed state and recovering, it gets a TRUE
+    recover <- newInfective & recoverDraw < survivalProb
+    # if a dog is both leaving the exposed state and moving to infective, it gets a TRUE
+    infective <- newInfective & recoverDraw >= survivalProb
+    popMatrix[infective, 'exposed']       <- 0
+    popMatrix[infective, 'infective']     <- 1
+    popMatrix[infective, 'timeInfective'] <- 0
+    popMatrix[recover, 'exposed']         <- 0
+    popMatrix[recover, 'immune']          <- 1
     
-    # Transition infective to death or immune:
-    newRecovered <- popMatrix[, 'infective'] == 1 & popMatrix[, 'timeInfective'] > popMatrix[, 'timeLimitInfective']
-    recoverDraw <- runif(length(newRecovered))
-    recover <- newRecovered[recoverDraw < survivalProb]
-    death <- newRecovered[recoverDraw >= survivalProb]
-    popMatrix[recover, 'infective'] <- 0
-    popMatrix[recover, 'immune']    <- 1
-    popMatrix <- popMatrix[!death, , drop=FALSE]
+    # Transition infective to death:
+    newDead <- popMatrix[, 'infective'] == 1 & popMatrix[, 'timeInfective'] > popMatrix[, 'timeLimitInfective']
+    # Dog gets a TRUE if leaving infective, keep dogs with a FALSE
+    popMatrix <- popMatrix[!newDead, , drop=FALSE]
     
     return(popMatrix)
   }
