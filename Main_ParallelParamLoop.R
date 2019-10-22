@@ -24,10 +24,10 @@ colnames(paramCombos) <- c('initialPopSize', 'fecundityFactor',
                            'survivalProb', 'initialFracImmune', 'inMigrationFactor')
 
 # Store results here.
-qElimination        <- c(NA, simulationYears)
-qNoDogsLeft         <- c(NA, simulationYears)
-qElimWithDogsLeft   <- c(NA, simulationYears)
-qNoElimWithDogsLeft <- c(NA, simulationYears)
+qElimination        <- rep(NA, simulationYears)
+qNoDogsLeft         <- rep(NA, simulationYears)
+qElimWithDogsLeft   <- rep(NA, simulationYears)
+qNoElimWithDogsLeft <- rep(NA, simulationYears)
 
 startTime <- proc.time()
 
@@ -1037,10 +1037,10 @@ print(proc.time() - startTime)
 #                              'qNoElimWithDogs1', 'qNoElimWithDogs2', 'qNoElimWithDogs3', 
 #                              'qNoElimWithDogs4', 'qNoElimWithDogs5')
 
-colnames(simulationData) <- c('qElim1', 'qElim2', 'qElim3',
-                              'qExtinct1', 'qExtinct2', 'qExtinct3',
-                              'qElimWithDogs1', 'qElimWithDogs2', 'qElimWithDogs3',
-                              'qNoElimWithDogs1', 'qNoElimWithDogs2', 'qNoElimWithDogs3')
+colnames(simulationData) <- c('qElim1',
+                              'qExtinct1',
+                              'qElimWithDogs1',
+                              'qNoElimWithDogs1')
 
 write.csv(simulationData, 'simulationData.csv')
 write.csv(paramCombos, 'paramCombos.csv')
