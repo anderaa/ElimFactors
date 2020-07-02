@@ -11,7 +11,7 @@ simulationYears <- 1
 iterations      <- 5  
 
 # Build matrix of all combinations of parameters that are varied:
-initialPopSizeList    <- c(200, 600, 1800, 5400, 16200)  # representing a 300% increase at each subsequent level
+initialPopSizeList    <- 16200
 fecundityFactorList   <- seq(0.5, 1.5, length.out=5)
 varianceFactorList    <- c(1)  # variability of infectivity (not used) 
 meanFactorList        <- seq(0.5, 1.5, length.out=5) # infectivity
@@ -1047,6 +1047,6 @@ colnames(paramCombos) <- c('Population',
                           'Initial_immunity',
                           'In_migration',
                           'Incidence') #rename columns for regression for better understanding in regression analysis
-write.csv(simulationData, 'simulationData.csv')
-write.csv(paramCombos, 'paramCombos.csv')
+write.csv(simulationData, 'simulationData_pop16200.csv')
+write.csv(paramCombos, 'paramCombos_pop16200.csv')
 
