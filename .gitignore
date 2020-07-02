@@ -4,4 +4,4 @@
 .RData
 *.csv
 *.Rproj
-
+.DS_Store
