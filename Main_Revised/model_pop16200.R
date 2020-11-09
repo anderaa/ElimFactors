@@ -733,7 +733,7 @@ simulationData <- foreach(c = 1:nrow(paramCombos), .combine=rbind, .inorder=FALS
   # inputs for disease
   monthInitIntroduction <- 1     # USER CHOICE
   monthsOfPressure      <- 2     # USER CHOICE
-  dogsPerMonthExposed   <- ceiling(paramCombos[c,'epidemicSize']*initialPopSize*12)  # USER CHOICE
+  dogsPerMonthExposed   <- ceiling(paramCombos[c,'epidemicSize']*initialPopSize/12)  # USER CHOICE
   timeLimitExposed      <- 22
   timeLimitInfective    <- 3
   survivalProb          <- paramCombos[c, 'survivalProb']
